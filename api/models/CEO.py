@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
-from sqlalchemy.orm import declarative_base
 from pydantic import BaseModel
 from db import engine 
-
-Base = declarative_base()
+from models.Base import Base
 
 class CEO(Base):
     __tablename__ = 'CEOS'
@@ -12,6 +10,13 @@ class CEO(Base):
     Slug = Column(String)
     Year_Served = Column(Integer)
 
-Base.metadata.create_all(engine)
+class CEOSchema(BaseModel):
+    id: int
+    Name: str
+    Slug: str
+    Year_Served: int
 
-export = CEO
+class Config:
+    populate_by_name = True
+
+Base.metadata.create_all(engine)

@@ -44,8 +44,3 @@ def create_ceo(id: int, Name: str, Slug: str, Year_Served: int):
     session.add(new_ceo)
     session.commit()
     return new_ceo
-
-@app.get("/ceoschema")
-def get_ceos():
-    ceos = session.query(CEOSchema)
-    return ceos.all()
