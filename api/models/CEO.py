@@ -12,13 +12,6 @@ class CEO(Base):
     Slug = Column(String)
     Year_Served = Column(Integer)
 
-class CEOSchema(BaseModel):
-    id: int
-    Name: str
-    Slug: str
-    Year_Served: int
-
-class Config:
-    populate_by_name = True
-
 Base.metadata.create_all(engine)
+
+export = CEO

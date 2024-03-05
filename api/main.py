@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from db import session
-from models import CEO, CEOSchema
+from models.Base import CEOSchema
+from models.CEO import CEO
 
 app = FastAPI()
 
@@ -43,3 +44,8 @@ def create_ceo(id: int, Name: str, Slug: str, Year_Served: int):
     session.add(new_ceo)
     session.commit()
     return new_ceo
+
+@app.get("/ceoschema")
+def get_ceos():
+    ceos = session.query(CEOSchema)
+    return ceos.all()
